@@ -10,8 +10,7 @@ const Footer = () => {
       style={{ fontFamily: '"Rajdhani", sans-serif' }}
     >
       <Box as="h5">
-        &copy; {new Date().getFullYear()}
-        <span>Heavnn.</span>
+        &copy; {new Date().getFullYear()} <span>Heavnn.</span>
       </Box>
       <h5>All rights reserved</h5>
     </Box>
