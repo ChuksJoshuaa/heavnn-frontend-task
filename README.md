@@ -1,5 +1,10 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Heavnn Frontend Task
 
+<img src="https://res.cloudinary.com/chuksmbanaso/image/upload/v1677792828/Screenshot_2023-03-02_at_22.30.29_aedyku.png" title="icon" alt />
+
+## Demo Link
+
+Access the site at [Project-Link](https://heavnn-frontend-task.vercel.app)
 ## Getting Started
 
 First, run the development server:

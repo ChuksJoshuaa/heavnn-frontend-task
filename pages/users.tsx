@@ -46,7 +46,7 @@ const users = () => {
         <Input
           pr="4.5rem"
           type="text"
-          placeholder="Search Title"
+          placeholder="Search Name or Username"
           value={value}
           onChange={(e) => setValue(e.target.value)}
           onKeyUp={handleChange}
