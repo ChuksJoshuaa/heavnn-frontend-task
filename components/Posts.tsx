@@ -1,14 +1,12 @@
 import {
   saveAllData,
   savePaginateData,
-  setLoader,
+  setLoader
 } from "@/redux/features/posts/postSlice";
 import { getDataFromLocalStorage } from "@/utils/getLocalStorage";
 import {
   InfoProps,
-  PostDataProps,
-  PostProps,
-  SearchDataProps,
+  PostDataProps, SearchDataProps
 } from "@/utils/interface";
 import { paginate } from "@/utils/pagination";
 import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
@@ -20,11 +18,11 @@ import {
   Heading,
   Input,
   InputGroup,
-  Text,
+  Text
 } from "@chakra-ui/react";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import { useAppDispatch, useAppSelector } from "../redux/hooks";
+import { useAppDispatch } from "../redux/hooks";
 import { Pagination } from "./";
 
 const Posts = () => {

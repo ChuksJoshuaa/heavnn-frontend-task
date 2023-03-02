@@ -1,19 +1,23 @@
-import { saveAllData } from "@/redux/features/posts/postSlice";
+import { saveAllData, setLoader } from "@/redux/features/posts/postSlice";
 import { useAppDispatch } from "@/redux/hooks";
 import { getDataFromLocalStorage } from "@/utils/getLocalStorage";
 import { InfoProps, PostDataProps } from "@/utils/interface";
 import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
 import {
-  Box, Button, Center,
+  Box,
+  Button,
+  Center,
   Flex,
-  Heading, Input, InputGroup, Text
+  Heading,
+  Input,
+  InputGroup,
+  Text,
 } from "@chakra-ui/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 
 const UsersArticle = () => {
- 
   const [postData, setPostData] = useState([]);
   const [searchData, setSearchData] = useState([]);
   const [value, setValue] = React.useState("");
@@ -118,7 +122,12 @@ const UsersArticle = () => {
               <Flex justify="space-between" alignItems="center" p="3">
                 <Box hidden>yex</Box>
                 <Box display="flex">
-                  <EditIcon w={6} h={6} color="blue.500" mx={2} />
+                  <Link
+                    href={`/update/${item?.id}`}
+                    onClick={() => dispatch(setLoader(true))}
+                  >
+                    <EditIcon w={6} h={6} color="blue.500" mx={2} />
+                  </Link>
                   <DeleteIcon
                     w={6}
                     h={6}

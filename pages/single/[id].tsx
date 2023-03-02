@@ -10,34 +10,31 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 const SinglePage = () => {
-   const router = useRouter();
-   const { isLoading } = useAppSelector((state) => state.post);
-   const dispatch = useAppDispatch();
-   const [singlePost, setSinglePost] = useState(
-     {} as SinglePageProps["singlePost"]
-   );
-   let getData: InfoProps[] = getDataFromLocalStorage().data;
-   const newId = Number(router.query.id);
+  const router = useRouter();
+  const { isLoading } = useAppSelector((state) => state.post);
+  const dispatch = useAppDispatch();
+  const [singlePost, setSinglePost] = useState(
+    {} as SinglePageProps["singlePost"]
+  );
+  let getData: InfoProps[] = getDataFromLocalStorage().data;
+  const newId = Number(router.query.id);
 
-   const findData = () => {
-     const findIt = getData.find((item) => item.id === newId);
+  const findData = () => {
+    const findIt = getData.find((item) => item.id === newId);
 
-     setSinglePost(findIt as SinglePageProps["setSinglePost"]);
-   };
+    setSinglePost(findIt as SinglePageProps["setSinglePost"]);
+  };
 
-   useEffect(() => {
-     setTimeout(() => {
-       dispatch(setLoader(false));
-     }, 900);
-   });
+  useEffect(() => {
+    setTimeout(() => {
+      dispatch(setLoader(false));
+    }, 900);
+  });
 
-   useEffect(() => {
-     findData();
-   }, [newId]);
+  useEffect(() => {
+    findData();
+  }, [newId]);
 
-   if (isLoading) {
-     return <Loader />;
-   }
   const DeletePost = (id: number) => {
     const filteredValue = getDataFromLocalStorage().data.filter(
       (item: InfoProps) => item.id !== id
@@ -46,6 +43,10 @@ const SinglePage = () => {
 
     router.push("/");
   };
+
+  if (isLoading) {
+    return <Loader />;
+  }
 
   return (
     <Container maxW="700px" mt="8">

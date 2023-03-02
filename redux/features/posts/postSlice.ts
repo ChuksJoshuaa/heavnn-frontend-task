@@ -6,7 +6,7 @@ import {
 } from "@/utils/getLocalStorage";
 
 const initialState: PostProps = {
-  isLoading: false,
+  isLoading: true,
   saveData: [],
   paginateData: [],
   userData: [],

@@ -1,6 +1,10 @@
-import { Posts } from "@/components";
-import { saveAllData, saveUserData } from "@/redux/features/posts/postSlice";
-import { useAppDispatch } from "@/redux/hooks";
+import { Loader, Posts } from "@/components";
+import {
+  saveAllData,
+  saveUserData,
+  setLoader,
+} from "@/redux/features/posts/postSlice";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import {
   getDataFromLocalStorage,
   getUsersFromLocalStorage,
@@ -14,7 +18,7 @@ import { useEffect } from "react";
 
 const Home: NextPage<DataProps> = ({ data, userData }) => {
   const dispatch = useAppDispatch();
-
+  const { isLoading } = useAppSelector((state) => state.post);
   const checkAllData = () => {
     let defaultData = getDataFromLocalStorage().data;
 
@@ -36,9 +40,19 @@ const Home: NextPage<DataProps> = ({ data, userData }) => {
   };
 
   useEffect(() => {
+    setTimeout(() => {
+      dispatch(setLoader(false));
+    }, 400);
+  });
+
+  useEffect(() => {
     checkUserData();
     checkAllData();
   }, []);
+
+  if (isLoading) {
+    return <Loader />;
+  }
 
   return (
     <Box>

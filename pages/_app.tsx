@@ -1,4 +1,4 @@
-import { Navbar } from "@/components";
+import { Footer, Navbar } from "@/components";
 import "@/styles/globals.css";
 import "@/styles/singleComponent.css";
 import theme from "../theme";
@@ -18,6 +18,7 @@ export default function App({ Component, pageProps }: AppProps) {
           <Box height="100%">
             <Component {...pageProps} />
           </Box>
+          <Footer />
         </Flex>
       </ChakraProvider>
     </Provider>
