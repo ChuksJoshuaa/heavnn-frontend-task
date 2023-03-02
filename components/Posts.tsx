@@ -128,16 +128,27 @@ const Posts = () => {
                       fontSize="xs"
                       size="xs"
                       variant="solid"
+                      onClick={() => dispatch(setLoader(true))}
                     >
                       <Link href={`/single/${item.id}`}>Read More</Link>
                     </Button>
                   </Text>
                 </Box>
               </Flex>
-              <Flex justify="space-between" alignItems="center" p="3">
+              <Flex
+                direction="row-reverse"
+                justify="space-between"
+                alignItems="center"
+                p="3"
+              >
                 <Box hidden>yex</Box>
                 <Box display="flex">
-                  <EditIcon w={6} h={6} color="blue.500" mx={2} />
+                  <Link
+                    href={`/update/${item.id}`}
+                    onClick={() => dispatch(setLoader(true))}
+                  >
+                    <EditIcon w={6} h={6} color="blue.500" mx={2} />
+                  </Link>
                   <DeleteIcon
                     w={6}
                     h={6}

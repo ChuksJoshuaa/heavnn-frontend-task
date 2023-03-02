@@ -78,6 +78,7 @@ const users = () => {
                 <Heading
                   fontSize="xl"
                   textTransform="capitalize"
+                  color="blue.500"
                   style={{ fontFamily: '"Rajdhani", sans-serif' }}
                 >
                   {item.name}
@@ -92,13 +93,13 @@ const users = () => {
                 <Box>
                   <Text mt={1}>Phone: {item.phone}</Text>
                 </Box>
-                <Box>
+                <Box color="gray.600">
                   <Text mt={1}>
                     Address: {item.address.street} {item.address.city}
                   </Text>
                 </Box>
-                <Box display="flex">
-                  <Text mt={1}>{item.website}</Text>
+                <Box display="flex" color="blackAlpha.900">
+                  <Text mt={1}>Website: {item.website}</Text>
                 </Box>
               </Flex>
               <Flex justify="center" alignItems="center" p="3">

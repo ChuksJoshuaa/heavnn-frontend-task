@@ -7,6 +7,7 @@ export interface InfoProps {
 
 export interface SinglePageProps {
   singlePost: InfoProps;
+  setSinglePost: React.SetStateAction<InfoProps>;
 }
 
 export interface PostDataProps {
