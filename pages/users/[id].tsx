@@ -7,6 +7,7 @@ import {
   Box,
   Button,
   Center,
+  Container,
   Flex,
   Heading,
   Input,
@@ -61,7 +62,7 @@ const UsersArticle = () => {
     }
   };
   return (
-    <Box>
+    <Container maxW="1500px" p="4">
       <Button m={3} colorScheme="red">
         <Link href={`/users`}>Go Back</Link>
       </Button>
@@ -119,7 +120,12 @@ const UsersArticle = () => {
                   </Text>
                 </Box>
               </Flex>
-              <Flex justify="space-between" alignItems="center" p="3">
+              <Flex
+                direction="row-reverse"
+                justify="space-between"
+                alignItems="center"
+                p="3"
+              >
                 <Box hidden>yex</Box>
                 <Box display="flex">
                   <Link
@@ -140,7 +146,7 @@ const UsersArticle = () => {
           ))}
         </div>
       )}
-    </Box>
+    </Container>
   );
 };
 

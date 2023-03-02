@@ -41,7 +41,7 @@ const SinglePage = () => {
     );
     dispatch(saveAllData(filteredValue));
 
-    router.push("/");
+    router.back();
   };
 
   if (isLoading) {
@@ -71,8 +71,8 @@ const SinglePage = () => {
         <Box p={2}>{singlePost?.body}</Box>
 
         <Flex justify="space-between" pr={3}>
-          <Button m={3} colorScheme="teal">
-            <Link href={`/`}>Go Back</Link>
+          <Button m={3} colorScheme="teal" onClick={() => router.back()}>
+            Go Back
           </Button>
 
           <Box display="flex" mt="5">
