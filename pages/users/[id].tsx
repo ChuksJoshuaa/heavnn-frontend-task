@@ -1,41 +1,37 @@
-import {
-  saveAllData,
-  savePaginateData,
-  setLoader,
-} from "@/redux/features/posts/postSlice";
+import { saveAllData } from "@/redux/features/posts/postSlice";
+import { useAppDispatch } from "@/redux/hooks";
 import { getDataFromLocalStorage } from "@/utils/getLocalStorage";
-import {
-  InfoProps,
-  PostDataProps,
-  PostProps,
-  SearchDataProps,
-} from "@/utils/interface";
-import { paginate } from "@/utils/pagination";
+import { InfoProps, PostDataProps } from "@/utils/interface";
 import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
 import {
-  Box,
-  Button,
-  Center,
+  Box, Button, Center,
   Flex,
-  Heading,
-  Input,
-  InputGroup,
-  Text,
+  Heading, Input, InputGroup, Text
 } from "@chakra-ui/react";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
-import { useAppDispatch, useAppSelector } from "../redux/hooks";
-import { Pagination } from "./";
 
-const Posts = () => {
-  const dispatch = useAppDispatch();
-  const [page, setPage] = useState(0);
-  const [value, setValue] = React.useState("");
-  const [postData, setPostData] = useState([] as PostDataProps["postData"]);
+const UsersArticle = () => {
+ 
+  const [postData, setPostData] = useState([]);
   const [searchData, setSearchData] = useState([]);
+  const [value, setValue] = React.useState("");
+  const router = useRouter();
+  const userId = Number(router.query.id);
+  const dispatch = useAppDispatch();
+
+  const filteredUser = () => {
+    let data = getDataFromLocalStorage().data;
+    const filtered = data.filter((item: InfoProps) => item.userId === userId);
+    if (filtered) {
+      setPostData(filtered);
+      setSearchData(filtered);
+    }
+  };
 
   const DeletePost = (id: number) => {
-    const filteredPost = postData.filter((item) => item.id !== id);
+    const filteredPost = postData.filter((item: InfoProps) => item.id !== id);
     setPostData(filteredPost);
 
     const filteredValue = getDataFromLocalStorage().data.filter(
@@ -44,23 +40,13 @@ const Posts = () => {
     dispatch(saveAllData(filteredValue));
   };
 
-  const paginateAllData = () => {
-    let data = getDataFromLocalStorage().data;
-    if (data) {
-      const newData = paginate(data);
-      dispatch(savePaginateData(newData));
-      setPostData(newData[page] as PostDataProps["setPostData"]);
-      setSearchData(newData[page] as SearchDataProps["setSearchData"]);
-    }
-  };
-
   useEffect(() => {
-    paginateAllData();
-  }, [page]);
+    filteredUser();
+  }, [userId]);
 
   const handleChange = () => {
     if (!value) {
-      setPostData(searchData);
+      setPostData(searchData as PostDataProps["setPostData"]);
     } else {
       let searchResult = new RegExp(`${value}`, "gi");
       const newSearchData = searchData.filter((item: InfoProps) =>
@@ -70,15 +56,10 @@ const Posts = () => {
       setPostData(newSearchData);
     }
   };
-
   return (
     <Box>
-      <Button
-        m={3}
-        colorScheme="teal"
-        onClick={() => dispatch(setLoader(true))}
-      >
-        <Link href={`/users`}>View All Users</Link>
+      <Button m={3} colorScheme="red">
+        <Link href={`/users`}>Go Back</Link>
       </Button>
       <InputGroup size="md" style={{ width: "500px", margin: "2em auto" }}>
         <Input
@@ -150,9 +131,8 @@ const Posts = () => {
           ))}
         </div>
       )}
-      <Pagination page={page} setPage={setPage} />
     </Box>
   );
 };
 
-export default Posts;
+export default UsersArticle;

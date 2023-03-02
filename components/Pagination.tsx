@@ -3,9 +3,7 @@ import { Flex } from "@chakra-ui/react";
 import { useAppSelector } from "../redux/hooks";
 
 const Pagination = ({ setPage, page }: PaginationProps) => {
-  const { paginateData, isLoading } = useAppSelector(
-    (state): PostProps => state.post
-  );
+  const { paginateData } = useAppSelector((state): PostProps => state.post);
 
   const nextPage = () => {
     setPage((oldPage) => {
@@ -32,27 +30,25 @@ const Pagination = ({ setPage, page }: PaginationProps) => {
 
   return (
     <Flex justifyContent="center" alignItems="center" mt="5">
-      {!isLoading && (
-        <div className="btn-container">
-          <button className="prev-btn" onClick={prevPage}>
-            prev
-          </button>
-          {paginateData.map((item, index) => {
-            return (
-              <button
-                key={index}
-                className={`page-btn ${index === page ? "active-btn" : null}`}
-                onClick={() => handlePage(index)}
-              >
-                {index + 1}
-              </button>
-            );
-          })}
-          <button className="next-btn" onClick={nextPage}>
-            next
-          </button>
-        </div>
-      )}
+      <div className="btn-container">
+        <button className="prev-btn" onClick={prevPage}>
+          prev
+        </button>
+        {paginateData.map((item, index) => {
+          return (
+            <button
+              key={index}
+              className={`page-btn ${index === page ? "active-btn" : null}`}
+              onClick={() => handlePage(index)}
+            >
+              {index + 1}
+            </button>
+          );
+        })}
+        <button className="next-btn" onClick={nextPage}>
+          next
+        </button>
+      </div>
     </Flex>
   );
 };

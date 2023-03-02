@@ -13,6 +13,10 @@ export interface PostDataProps {
   postData: InfoProps[] | [];
   setPostData: React.SetStateAction<InfoProps[] | any>;
 }
+export interface SearchDataProps {
+  searchData: InfoProps[] | [];
+  setSearchData: React.SetStateAction<InfoProps[] | any>;
+}
 
 export interface PaginationProps {
   setPage: React.Dispatch<React.SetStateAction<number>>;

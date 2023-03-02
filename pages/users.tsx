@@ -1,13 +1,17 @@
 import { getUsersFromLocalStorage } from "@/utils/getLocalStorage";
 import { UserProps } from "@/utils/interface";
 import {
-    Box, Center,
-    Container,
-    Divider,
-    Flex,
-    Heading,
-    Input,
-    InputGroup, Text
+  Box,
+  Button,
+  Center,
+  Container,
+  Divider,
+  Flex,
+  Heading,
+  Input,
+  InputGroup,
+  Link,
+  Text,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 
@@ -97,7 +101,11 @@ const users = () => {
                   <Text mt={1}>{item.website}</Text>
                 </Box>
               </Flex>
-              <Flex justify="space-between" alignItems="center" p="3"></Flex>
+              <Flex justify="center" alignItems="center" p="3">
+                <Button>
+                  <Link href={`/users/${item.id}`}>View All User Articles</Link>
+                </Button>
+              </Flex>
             </Box>
           ))}
         </div>

@@ -1,6 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { PostProps, UserProps } from "@/utils/interface";
-import { saveUserDataLocalStorage } from "@/utils/getLocalStorage";
+import { InfoProps, PostProps, UserProps } from "@/utils/interface";
+import {
+  saveDataLocalStorage,
+  saveUserDataLocalStorage,
+} from "@/utils/getLocalStorage";
 
 const initialState: PostProps = {
   isLoading: false,
@@ -19,6 +22,7 @@ export const postSlice = createSlice({
     },
 
     saveAllData: (state, action) => {
+      saveDataLocalStorage(action.payload as InfoProps);
       state.saveData = action.payload;
     },
 

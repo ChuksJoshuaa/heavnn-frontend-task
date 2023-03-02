@@ -1,23 +1,31 @@
-import { DataProps } from "@/utils/interface";
-import { BASE_URL, USER_BASE_URL } from "@/utils/routes";
-import axios from "axios";
-import { NextPage } from "next";
+import { Posts } from "@/components";
+import { saveAllData, saveUserData } from "@/redux/features/posts/postSlice";
 import { useAppDispatch } from "@/redux/hooks";
 import {
-  saveAllData,
-  savePaginateData,
-  saveUserData,
-} from "@/redux/features/posts/postSlice";
+  getDataFromLocalStorage,
+  getUsersFromLocalStorage,
+} from "@/utils/getLocalStorage";
+import { DataProps } from "@/utils/interface";
+import { BASE_URL, USER_BASE_URL } from "@/utils/routes";
 import { Box, Container } from "@chakra-ui/react";
-import { Posts } from "@/components";
-import { paginate } from "@/utils/pagination";
+import axios from "axios";
+import { NextPage } from "next";
 import { useEffect } from "react";
-import { getUsersFromLocalStorage } from "@/utils/getLocalStorage";
 
 const Home: NextPage<DataProps> = ({ data, userData }) => {
   const dispatch = useAppDispatch();
 
-  const checkData = () => {
+  const checkAllData = () => {
+    let defaultData = getDataFromLocalStorage().data;
+
+    if (defaultData) {
+      dispatch(saveAllData(defaultData));
+    } else {
+      dispatch(saveAllData(data));
+    }
+  };
+
+  const checkUserData = () => {
     let defaultData = getUsersFromLocalStorage().data;
 
     if (defaultData) {
@@ -27,13 +35,9 @@ const Home: NextPage<DataProps> = ({ data, userData }) => {
     }
   };
 
-  dispatch(saveAllData(data));
-
-  const newData = paginate(data);
-  dispatch(savePaginateData(newData));
-
   useEffect(() => {
-    checkData();
+    checkUserData();
+    checkAllData();
   }, []);
 
   return (
